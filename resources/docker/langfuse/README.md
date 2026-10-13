@@ -36,12 +36,14 @@ lsof -i :9090 -i :9099 -i :5432 -i :6379 -i :9000 -i :9001
 
 ## 应用侧接入
 
-`application.yaml` 里的追踪总开关默认关闭、内容采集默认开启，密钥已经和编排里的 `LANGFUSE_INIT_*` 对齐。起栈后只需打开追踪：
+`application.yaml` 里的追踪总开关默认关闭、内容采集默认开启。应用密钥从环境变量读取；使用本目录的本地示例编排时，设置对应的项目密钥再打开追踪：
 
 ```bash
 AGENT_TRACE_ENABLED=true \
 RAGENT_ENGINE_TYPE=agent \
-java -jar bootstrap/target/ragent.jar
+LANGFUSE_PUBLIC_KEY=pk-lf-ragent-local \
+LANGFUSE_SECRET_KEY=sk-lf-ragent-local \
+java -jar bootstrap/target/bootstrap-0.0.1-SNAPSHOT.jar
 ```
 
 此时 Input / Output 会随 trace 一起上报，无需再额外配置内容开关。环境变量在 Spring 的松散绑定里优先于配置文件，IDE Run Configuration 也遵循同一规则。
