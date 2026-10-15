@@ -68,3 +68,8 @@ application-local.yaml
 *.sqlite3
 .DS_Store
 Thumbs.db
+
+### Local review reports ###
+docs/open-source-readiness.md
+docs/security-review-*.md
+docs/publication-security-check-*.md

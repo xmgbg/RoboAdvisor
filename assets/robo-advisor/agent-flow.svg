@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#7297c9" stroke-width="1.5"/></marker></defs>
+<rect width="1440" height="880" rx="24" fill="#f6f9fe"/>
+<g font-family="Microsoft YaHei, sans-serif">
+<rect x="48" y="44" width="6" height="34" rx="3" fill="#2563eb"/>
+<text x="72" y="72" font-size="30" font-weight="700" fill="#123b80">Agent · 从需求到行动</text>
+<text x="72" y="108" font-size="17" fill="#627693">通过 ReAct 循环串联知识检索、业务工具与人工确认</text>
+<rect x="48" y="170" width="360" height="105" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="228.0" y="205" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">用户提出需求</text>
+<text x="228.0" y="236" text-anchor="middle" font-size="17" fill="#4f6582">型号 / 操作 / 故障 · 连续追问</text>
+<rect x="540" y="170" width="360" height="105" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="720.0" y="205" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">加载上下文</text>
+<text x="720.0" y="236" text-anchor="middle" font-size="17" fill="#4f6582">近期消息 · 摘要 · 长期记忆</text>
+<rect x="1032" y="170" width="360" height="105" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="1212.0" y="205" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">ReAct 推理</text>
+<text x="1212.0" y="236" text-anchor="middle" font-size="17" fill="#4f6582">结合目标与中间结果决定行动</text>
+<path d="M408 222H535" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M900 222H1027" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1212 275V324H258M720 324H1182" fill="none" stroke="#7297c9" stroke-width="2"/>
+<path d="M258 324V365" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720 324V365" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1182 324V365" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="48" y="344" font-size="15" font-weight="700" fill="#627693">按任务选择行动</text>
+<rect x="48" y="370" width="420" height="130" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="258.0" y="405" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">检索产品与故障知识</text>
+<text x="258.0" y="436" text-anchor="middle" font-size="17" fill="#4f6582">产品手册 · 操作规范 · 故障知识</text>
+<text x="258.0" y="462" text-anchor="middle" font-size="17" fill="#4f6582">召回 → 融合 → 精排</text>
+<rect x="510" y="370" width="420" height="130" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="720.0" y="405" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">加载 Skills · 调用 MCP</text>
+<text x="720.0" y="436" text-anchor="middle" font-size="17" fill="#4f6582">按需开放工具与执行参数</text>
+<text x="720.0" y="462" text-anchor="middle" font-size="17" fill="#4f6582">无需确认的工具直接执行</text>
+<rect x="972" y="370" width="420" height="130" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="1182.0" y="405" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">发起人工确认</text>
+<text x="1182.0" y="436" text-anchor="middle" font-size="17" fill="#4f6582">持久化待确认状态</text>
+<text x="1182.0" y="462" text-anchor="middle" font-size="17" fill="#4f6582">批准后执行 / 拒绝后反馈</text>
+<path d="M258 500V542H720V581" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720 500V581" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1182 500V542H720V581" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="510" y="586" width="420" height="104" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="720.0" y="621" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">观察结果 · 更新上下文</text>
+<text x="720.0" y="652" text-anchor="middle" font-size="17" fill="#4f6582">保留工具调用关系与必要信息</text>
+<path d="M930 638H1412V222H1397" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
+<text x="1040" y="590" font-size="15" font-weight="700" fill="#627693">需要更多信息时继续推理</text>
+<path d="M720 690V738" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="294" y="744" width="852" height="94" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="720.0" y="779" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">生成回答 · SSE 输出 · 保存会话</text>
+<text x="720.0" y="810" text-anchor="middle" font-size="17" fill="#4f6582">满足结束条件后返回结论、引用与执行结果</text>
+</g></svg>

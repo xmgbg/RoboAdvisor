@@ -1,9 +1,10 @@
 # 安全说明
 
+RoboAdvisor 当前用于本地开发与技术验证，不能将示例配置直接用于公网部署。
 
 ## 报告问题
 
-发布仓库：[xmgbg/EnterpriseCopilot](https://github.com/xmgbg/EnterpriseCopilot)。如果仓库启用了 GitHub 私密漏洞报告，请通过 Security → Report a vulnerability 私下提交。若没有该入口，可以在 Issue 中仅请求建立私密联系，不要公开漏洞细节、凭据、用户数据或可执行的攻击步骤。
+发布仓库：[xmgbg/RoboAdvisor](https://github.com/xmgbg/RoboAdvisor)。如果仓库启用了 GitHub 私密漏洞报告，请通过 Security → Report a vulnerability 私下提交。若没有该入口，可以在 Issue 中仅请求建立私密联系，不要公开漏洞细节、凭据、用户数据或可执行的攻击步骤。
 
 报告建议包含受影响版本、问题类型、影响范围及经过脱敏的复现说明。请勿通过真实用户数据或未经授权的外部服务验证问题。
 

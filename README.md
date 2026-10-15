@@ -1,188 +1,151 @@
 <div align="center">
 
-# EnterpriseCopilot · 企智通
+<img src="assets/robo-advisor/logo.png" alt="智机顾问机器人顾问" width="200" />
 
-### 基于 Agentic RAG 的企业智能助手
+# RoboAdvisor · 智机顾问
 
-企业知识问答 · 多步骤工具调用 · 可追踪的执行过程
+### 面向机器人企业的 Agentic RAG 智能助手平台
 
+从产品咨询到故障排查，让机器人产品服务更高效。
 
-![Java](https://img.shields.io/badge/Java-17-2563eb?style=flat-square)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1-16a34a?style=flat-square)
-![React](https://img.shields.io/badge/React-18-0891b2?style=flat-square)
-![License](https://img.shields.io/badge/License-Apache_2.0-64748b?style=flat-square)
+产品咨询 · 操作指导 · 故障排查 · 业务办理
+
+[GitHub](https://github.com/xmgbg/RoboAdvisor) · [快速开始](#快速开始) · [系统架构](#系统架构) · [核心能力](#核心能力) · [启动文档](启动.MD)
+
+![Java](https://img.shields.io/badge/Java-17-2563EB?style=flat-square)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1-2563EB?style=flat-square)
+![AgentScope](https://img.shields.io/badge/AgentScope-2.0-2563EB?style=flat-square)
+![React](https://img.shields.io/badge/React-18-2563EB?style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-2563EB?style=flat-square)
 
 </div>
 
-EnterpriseCopilot 面向企业员工的内部知识咨询与业务办理，将知识库检索、多轮对话和工具调用纳入统一服务。管理员维护文档、技能和助手配置，员工通过自然语言查制度、问流程，并在接入相应业务工具后发起操作。
+## 项目介绍
 
-本仓库基于 [nageoffer/ragent](https://github.com/nageoffer/ragent) 进行品牌、配置隔离与发布文档调整，保留上游源码、版权声明和 Apache-2.0 许可证。核心引擎及工程能力来自上游；Java 包名、Maven 坐标和接口前缀沿用原项目。
+**智机顾问（RoboAdvisor）** 面向机器人企业产品咨询、操作指导、故障排查及业务办理场景，基于 **Spring Boot、React 与 AgentScope** 构建企业智能助手平台。通过接入产品手册、操作规范与故障知识，融合知识检索、智能体推理及业务工具调用，实现带来源引用的多轮问答与交互式任务办理，并提供知识库管理、执行过程展示及人工确认能力。
+
+系统提供 **Workflow 与 ReAct 双执行模式**：既支持流程明确的知识问答，也支持需要反复检索、补充信息与调用工具的复杂需求。管理员通过控制台维护知识库、模型、技能与工具配置，并查看任务执行过程。
 
 ## 业务场景
 
-| 场景 | 交互示例 | 能力边界 |
+| 场景 | 典型问题 | 助手如何参与 |
 | --- | --- | --- |
-| 人事与行政咨询 | 请假规定是什么？会议室如何预约？ | 基于企业提供的制度与手册检索回答 |
-| IT 支持 | 系统无法登录，应该如何排查？ | 结合操作手册多轮澄清，并展示来源 |
-| 财务与流程查询 | 开票信息在哪里？报销需要哪些材料？ | 从对应知识库查找流程与说明 |
-| 业务办理 | 帮我申请请假、预约会议室 | 需要配置业务工具；示例技能不等于真实企业系统接入 |
+| 产品咨询 | “这两款机器人有什么区别，分别适合什么场景？” | 检索产品规格与适用条件，结合多轮追问进行对比，并展示依据 |
+| 操作指导 | “首次使用需要完成哪些配置？如何按规范启动？” | 根据对应型号的操作手册，查找配置要求、操作步骤与注意事项 |
+| 故障排查 | “设备出现告警且无法启动，需要检查哪些项目？” | 澄清型号、告警信息与现象，检索故障知识，引导逐步排查 |
+| 业务办理 | “帮我提交设备报修申请，并查询处理进度。” | 接入业务工具后，收集必要参数，对需要确认的操作发起确认并执行 |
 
-## 架构与执行链路
+产品问答与排查建议以实际导入的知识为依据；报修申请、工单查询等业务办理依赖实际接入的 MCP 工具与权限配置，仓库中的示例工具服务用于演示调用链路。
 
-架构图使用 GitHub 可渲染的 Mermaid，源码随 README 一起维护。
+## 系统架构
 
-```mermaid
-flowchart TB
-    subgraph UI["React 控制台"]
-        EMP["员工端<br/>聊天 · 来源 · 工具确认"]
-        ADMIN["管理端<br/>知识 · 技能 · Trace · 审计"]
-    end
-    UI --> API["Spring Boot API · 认证 · SSE · 会话"]
-    subgraph ENGINE["双执行引擎"]
-        WF["Workflow<br/>固定问答管线"]
-        AG["AgentScope ReAct<br/>迭代推理与行动"]
-    end
-    API --> WF
-    API --> AG
-    subgraph CAP["知识与行动"]
-        RET["混合检索<br/>召回 → RRF → Rerank"]
-        MCP["Skills + MCP<br/>按需工具 · 人工确认"]
-        MEM["记忆管理<br/>裁剪 · 摘要 · 长期事实"]
-    end
-    WF --> RET
-    AG --> RET
-    AG --> MCP
-    AG --> MEM
-    subgraph FOUNDATION["模型、数据与运行支撑"]
-        AI["模型层<br/>Chat · Embedding · Rerank · VLM"]
-        DATA["存储与索引<br/>PostgreSQL · 对象存储<br/>可选 Milvus / ES / LightRAG"]
-        OPS["运行保障<br/>Redis · RocketMQ<br/>Trace · 审计"]
-    end
-    WF --> AI
-    AG --> AI
-    RET --> DATA
-    MEM --> DATA
-    MCP --> OPS
-    classDef entry fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a;
-    classDef engine fill:#eef2ff,stroke:#6366f1,color:#312e81;
-    classDef data fill:#ecfdf5,stroke:#10b981,color:#065f46;
-    class EMP,ADMIN,API entry;
-    class WF,AG,MCP,RET engine;
-    class AI,DATA,MEM,OPS data;
-```
+### 总体架构
 
-### 从提问到执行
+![RoboAdvisor 总体架构](assets/robo-advisor/architecture.png)
 
-```mermaid
-flowchart TB
-    Q["用户提出需求"] --> CTX["加载上下文与记忆"]
-    CTX --> R["ReAct 推理"]
-    R --> T{"下一步行动"}
-    T --> SEARCH["检索企业知识"]
-    T --> SKILL["加载技能与业务工具"]
-    SKILL --> C{"工具是否要求确认"}
-    C -->|是| H["持久化待确认状态<br/>等待批准 / 拒绝"]
-    C -->|否| EXEC["执行工具"]
-    H -->|批准| EXEC
-    H -->|拒绝| OBS["观察结果"]
-    SEARCH --> OBS
-    EXEC --> OBS
-    OBS --> R
-    T --> DONE["生成回答<br/>SSE 输出 · 会话保存"]
-```
+### Agent 执行流程
 
-Workflow 模式按记忆加载、问题改写与拆分、意图识别、检索、Prompt 组装和生成顺序执行。Agent 模式将知识检索作为工具，在迭代次数约束内推进任务。人工确认应用于被配置为需要确认的工具调用。
+![Agent 需求分析、工具行动与人工确认流程](assets/robo-advisor/agent-flow.png)
 
-### 从文档到知识
+### 知识入库流程
 
-```mermaid
-flowchart LR
-    DOC["上传文档 / 远程来源"] --> P["Parse<br/>解析正文与资产"]
-    P --> C["Chunk<br/>切分与元数据"]
-    C --> E["Embed<br/>生成向量"]
-    E --> I["Index / Persist<br/>写入知识与索引"]
-    I --> V["向量库"]
-    I -. 可选 .-> K["关键词 / 图谱索引"]
-    DOC --> O["对象存储<br/>源文件与资产"]
-    P --> LOG["任务状态与节点日志"]
-    C --> LOG
-    E --> LOG
-    I --> LOG
-```
+![文档解析、切分、向量化与索引流程](assets/robo-advisor/knowledge-pipeline.png)
 
 ## 核心能力
 
-| 能力 | 实现要点 |
+### 知识检索与回答证据
+
+- **问题理解**：上下文改写、问题拆分、查询词映射与树形意图识别，按问题路由知识库。
+- **混合检索**：支持向量、关键词、图谱通道，结合去重、加权 RRF 与 Rerank 组织检索结果。
+- **上下文预算**：分别控制召回数量、精排候选与最终上下文，平衡检索覆盖与模型输入成本。
+- **回答引用**：提供引用来源、原文预览、推荐追问与用户反馈入口。
+
+### Agent 与业务工具
+
+- **ReAct 执行循环**：依据中间结果继续检索、补充信息或调用工具，推进多步骤任务。
+- **Skills 按需加载**：根据任务加载技能，并约束关联工具的可用范围。
+- **MCP 工具接入**：统一连接外部能力，支持工具执行事件与结果展示。
+- **人工确认与恢复**：对配置为需要确认的操作保存待确认状态，获得反馈后继续执行。
+
+### 多轮记忆与执行控制
+
+- **分层记忆**：工具结果裁剪、会话摘要与跨会话事实记忆共同管理上下文。
+- **连续交互**：保留近期消息及必要的工具调用关系，为追问提供上下文。
+- **任务控制**：分布式排队、并发管理、流式停止与跨节点取消。
+- **可观测性**：执行时间线、工具状态、耗时、Trace 与配置变更审计。
+
+### 知识维护与模型适配
+
+- **文档入库**：解析、切分、向量化、索引持久化与任务状态管理。
+- **知识维护**：知识库管理、分块管理、文档资产与远程来源刷新。
+- **模型适配**：Chat、Embedding、Rerank、VLM 等模型客户端与供应商配置。
+- **模型策略**：RAG 链路支持模型档位、候选路由与降级；Agent 主模型独立配置。
+
+> 默认采用 Agent 模式与 PostgreSQL 向量检索。关键词、图谱、联网搜索及 Langfuse Trace 按需配置启用。
+
+## 技术栈
+
+| 层次 | 技术 |
 | --- | --- |
-| 问题理解 | 查询词映射、上下文改写、问题拆分、树形意图与知识库路由 |
-| 混合检索 | 通道并行召回、去重、加权 RRF、Rerank；召回、精排和最终上下文预算分别控制 |
-| 工具与技能 | MCP 工具接入、Skills 按需加载、工具执行事件与人工确认 |
-| 对话记忆 | Workflow 近期消息与摘要；Agent 工具结果裁剪、摘要与长期事实记忆 |
-| 知识维护 | 文档上传、入库 Pipeline、Chunk 管理与远程刷新 |
-| 回答证据 | 来源与引用、原文预览、推荐追问、用户反馈 |
-| 运行管理 | 分布式排队与并发控制、流式取消、Trace 和配置变更审计 |
-| 模型接入 | RAG 模型档位、候选路由与降级；Agent 主模型独立配置 |
+| 前端交互 | React 18 · TypeScript · Vite · Tailwind CSS · Zustand |
+| 应用服务 | Java 17 · Spring Boot 4.1 · MyBatis-Plus · Sa-Token |
+| 智能体 | AgentScope · ReAct · Skills · MCP · HITL |
+| 检索与数据 | PostgreSQL · 向量检索 · 加权 RRF · Rerank |
+| 缓存与消息 | Redis · Redisson · RocketMQ |
+| 文件与资产 | S3 兼容对象存储 · OSS |
+| 可选扩展 | Milvus · Elasticsearch · LightRAG · Langfuse |
 
-当前默认启用 Agent 模式、PostgreSQL 向量存储和向量检索。关键词、图谱、联网搜索及 Agent Langfuse Trace 默认关闭，启用前需配置对应依赖。Agent 主模型默认使用单模型，不能将 RAG 模型路由的降级能力视为 Agent 主模型的多供应商降级。
+## 工程模块
 
-## 技术与模块
-
-| 层次 | 技术 / 模块 |
+| 模块 | 职责 |
 | --- | --- |
-| 前端 | React 18 · TypeScript · Vite · Tailwind CSS · Zustand |
-| 应用 | Java 17 · Spring Boot 4.1 · AgentScope · MyBatis-Plus · Sa-Token |
-| 数据与运行支撑 | PostgreSQL · Redis / Redisson · RocketMQ · S3 Compatible / OSS |
-| 可选检索与观测 | Milvus · Elasticsearch · LightRAG · Langfuse |
+| `bootstrap` | 应用启动、主配置与模块装配 |
+| `agent` | ReAct 执行、Skills、记忆、人工确认与任务控制 |
+| `rag` | 知识入库、检索、Workflow 问答与管理接口 |
+| `infra-ai` | 模型客户端、供应商适配与路由 |
+| `system` | 认证、用户与审计 |
+| `framework` | SSE、上下文传递、幂等与公共基础设施 |
+| `mcp-server` | 独立 MCP 示例工具服务 |
+| `frontend` | 咨询工作台与管理控制台 |
+| `resources` | 数据库脚本、容器配置与示例知识 |
 
-```text
-EnterpriseCopilot/
-├── bootstrap/     启动与主配置
-├── agent/         ReAct、Skills、记忆、确认与执行控制
-├── rag/           知识入库、检索、Workflow 问答与管理接口
-├── infra-ai/      模型客户端、路由与供应商适配
-├── system/        认证、用户与审计
-├── framework/     SSE、上下文、幂等与基础设施
-├── mcp-server/    独立 MCP 示例工具服务
-├── frontend/      员工端与管理控制台
-└── resources/     数据库、容器配置与示例知识
-```
+## 快速开始
 
-## 控制台预览
+### 1. 准备环境
 
-下图来自上游仓库，展示继承的界面能力；截图中的 Ragent 标识尚未替换。
+JDK 17、Node.js / npm、PostgreSQL、Redis、S3 兼容对象存储、RocketMQ，以及可用的模型服务。
 
-| 员工问答与来源 | 管理控制台 |
-| --- | --- |
-| ![员工问答](assets/qa-answer.png) | ![管理控制台](assets/admin-overview.png) |
+默认模型配置使用 DeepSeek 进行 Agent 对话，百炼提供 Embedding、Rerank 等能力。数据库、Redis、对象存储及模型凭据通过运行环境提供，变量示例见 [.env.example](.env.example)。**Spring Boot 不会自动加载 `.env` 文件**，请在终端或 IDE 运行配置中设置环境变量。
 
-## 本地运行
+### 2. 启动后端
 
-完整环境清单和初始化顺序见 [启动.MD](启动.MD)。先准备 PostgreSQL、Redis、对象存储、RocketMQ 和模型密钥，再启动后端与前端。
+完成基础服务、数据库初始化及环境变量配置后，在项目根目录执行：
 
 ```powershell
-# 项目根目录；在该窗口设置模型服务环境变量后执行
 .\mvnw.cmd -DskipTests package
 java -jar .\bootstrap\target\bootstrap-0.0.1-SNAPSHOT.jar
 ```
 
-另开终端启动前端：
+### 3. 启动前端
+
+另开终端：
 
 ```powershell
 cd frontend
-# 首次使用：将 .env.example 复制为 .env
+# 首次运行时创建本地配置
+Copy-Item .env.example .env
 npm install
 npm run dev
 ```
 
-前端：`http://127.0.0.1:5173`；后端接口前缀：`http://localhost:9090/api/ragent`。上述构建跳过测试，仅用于本地启动，不代表发布验收完成。
+| 服务 | 默认地址 |
+| --- | --- |
+| 前端 | `http://127.0.0.1:5173` |
+| 后端 API | `http://localhost:9090/api/ragent` |
+| MCP 示例服务 | `http://localhost:9099` |
 
-## 发布与安全
+### 4. 体验知识问答
 
+登录管理控制台，创建知识库并上传机器人产品手册、操作规范或故障知识，等待入库完成后在聊天页提问。需要体验业务工具时，按启动文档运行 MCP 示例服务；办理真实业务时，需接入对应的报修、工单等 MCP 服务。
 
-请勿提交真实 API Key、企业内部文档、用户数据、会话导出和本地凭据。安全反馈方式见 [SECURITY.md](SECURITY.md)。
-
-## 来源与许可
-
-本项目基于 [Ragent](https://github.com/nageoffer/ragent)，感谢原项目维护者及贡献者。本仓库采用独立发布历史，初始化与导入提交代表对上游代码的整理；原始作者及文件改动记录见 [八次改动记录](docs/git-soft-reset-20261013.md)，新旧提交对应关系见 [历史重建记录](docs/git-history-rebuild.md)。项目更名不改变原代码的贡献归属。
-
-遵循 [Apache License 2.0](LICENSE)。
+部署前请设置独立凭据并完成访问控制与安全加固，相关说明见 [SECURITY.md](SECURITY.md)。

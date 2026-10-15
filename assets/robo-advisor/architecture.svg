@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1100" viewBox="0 0 1440 1100">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#7297c9" stroke-width="1.5"/></marker></defs>
+<rect width="1440" height="1100" rx="24" fill="#f6f9fe"/>
+<g font-family="Microsoft YaHei, sans-serif">
+<rect x="48" y="44" width="6" height="34" rx="3" fill="#2563eb"/>
+<text x="72" y="72" font-size="30" font-weight="700" fill="#123b80">RoboAdvisor · 总体架构</text>
+<text x="72" y="108" font-size="17" fill="#627693">机器人企业 · 产品咨询 / 操作指导 / 故障排查 / 业务办理</text>
+<text x="48" y="150" font-size="15" font-weight="700" fill="#627693">01 / 交互入口</text>
+<rect x="48" y="168" width="660" height="100" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="378.0" y="203" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">咨询工作台</text>
+<text x="378.0" y="234" text-anchor="middle" font-size="17" fill="#4f6582">多轮对话 · 引用来源 · 工具确认 · 用户反馈</text>
+<rect x="732" y="168" width="660" height="100" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="1062.0" y="203" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">管理控制台</text>
+<text x="1062.0" y="234" text-anchor="middle" font-size="17" fill="#4f6582">知识库 · 文档 · 模型 · Skills · Trace · 审计</text>
+<path d="M720 268V300" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="48" y="302" width="1344" height="94" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="720.0" y="337" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">Spring Boot 服务入口</text>
+<text x="720.0" y="368" text-anchor="middle" font-size="17" fill="#4f6582">认证与用户上下文 · SSE 流式通信 · 会话管理 · 执行控制</text>
+<path d="M720 396V444" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="48" y="432" font-size="15" font-weight="700" fill="#627693">02 / 双执行引擎</text>
+<rect x="48" y="448" width="660" height="116" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="378.0" y="483" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">Workflow · 流程编排</text>
+<text x="378.0" y="514" text-anchor="middle" font-size="17" fill="#4f6582">上下文加载 → 改写拆分 → 意图识别</text>
+<text x="378.0" y="540" text-anchor="middle" font-size="17" fill="#4f6582">检索 → Prompt 组装 → 回答生成</text>
+<rect x="732" y="448" width="660" height="116" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="1062.0" y="483" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">AgentScope ReAct · 智能体执行</text>
+<text x="1062.0" y="514" text-anchor="middle" font-size="17" fill="#4f6582">推理 → 工具行动 → 观察结果 → 继续推理</text>
+<text x="1062.0" y="540" text-anchor="middle" font-size="17" fill="#4f6582">按任务需要检索知识、加载技能与调用工具</text>
+<path d="M720 564V614" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="48" y="602" font-size="15" font-weight="700" fill="#627693">03 / 知识、行动与记忆</text>
+<rect x="48" y="618" width="432" height="138" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="264.0" y="653" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">知识检索</text>
+<text x="264.0" y="684" text-anchor="middle" font-size="17" fill="#4f6582">向量 / 关键词 / 图谱召回</text>
+<text x="264.0" y="710" text-anchor="middle" font-size="17" fill="#4f6582">加权 RRF · Rerank</text>
+<text x="264.0" y="736" text-anchor="middle" font-size="17" fill="#4f6582">召回、精排与上下文预算</text>
+<rect x="504" y="618" width="432" height="138" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="720.0" y="653" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">Skills + MCP</text>
+<text x="720.0" y="684" text-anchor="middle" font-size="17" fill="#4f6582">技能按需加载 · 工具访问约束</text>
+<text x="720.0" y="710" text-anchor="middle" font-size="17" fill="#4f6582">人工确认 · 状态持久化</text>
+<text x="720.0" y="736" text-anchor="middle" font-size="17" fill="#4f6582">业务工具接入与多步骤执行</text>
+<rect x="960" y="618" width="432" height="138" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="1176.0" y="653" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">对话记忆</text>
+<text x="1176.0" y="684" text-anchor="middle" font-size="17" fill="#4f6582">近期上下文 · 工具结果裁剪</text>
+<text x="1176.0" y="710" text-anchor="middle" font-size="17" fill="#4f6582">会话摘要 · 长期事实</text>
+<text x="1176.0" y="736" text-anchor="middle" font-size="17" fill="#4f6582">按上下文水位压缩与保留</text>
+<path d="M720 756V804" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="48" y="792" font-size="15" font-weight="700" fill="#627693">04 / 基础设施</text>
+<rect x="48" y="808" width="432" height="138" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="264.0" y="843" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">模型与解析服务</text>
+<text x="264.0" y="874" text-anchor="middle" font-size="17" fill="#4f6582">Chat · Embedding · Rerank</text>
+<text x="264.0" y="900" text-anchor="middle" font-size="17" fill="#4f6582">VLM · 文档解析</text>
+<text x="264.0" y="926" text-anchor="middle" font-size="17" fill="#4f6582">供应商适配与模型配置</text>
+<rect x="504" y="808" width="432" height="138" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="720.0" y="843" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">数据与索引</text>
+<text x="720.0" y="874" text-anchor="middle" font-size="17" fill="#4f6582">PostgreSQL · 向量存储</text>
+<text x="720.0" y="900" text-anchor="middle" font-size="17" fill="#4f6582">S3 兼容存储 / OSS</text>
+<text x="720.0" y="926" text-anchor="middle" font-size="17" fill="#4f6582">可选：Milvus · ES · LightRAG</text>
+<rect x="960" y="808" width="432" height="138" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="1176.0" y="843" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">运行与观测</text>
+<text x="1176.0" y="874" text-anchor="middle" font-size="17" fill="#4f6582">Redis / Redisson · RocketMQ</text>
+<text x="1176.0" y="900" text-anchor="middle" font-size="17" fill="#4f6582">分布式并发 · 流式取消</text>
+<text x="1176.0" y="926" text-anchor="middle" font-size="17" fill="#4f6582">Trace · 配置审计 · Langfuse</text>
+<text x="48" y="1002" font-size="15" font-weight="700" fill="#627693">配置说明</text>
+<text x="48" y="1037" font-size="17" fill="#627693">默认：Agent + PostgreSQL 向量检索；关键词、图谱与 Langfuse 按需配置启用。</text>
+</g></svg>

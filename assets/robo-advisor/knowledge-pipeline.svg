@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="690" viewBox="0 0 1600 690">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#7297c9" stroke-width="1.5"/></marker></defs>
+<rect width="1600" height="690" rx="24" fill="#f6f9fe"/>
+<g font-family="Microsoft YaHei, sans-serif">
+<rect x="48" y="44" width="6" height="34" rx="3" fill="#2563eb"/>
+<text x="72" y="72" font-size="30" font-weight="700" fill="#123b80">Knowledge · 从文档到可检索知识</text>
+<text x="72" y="108" font-size="17" fill="#627693">异步处理文档，并保留分块、索引与任务状态</text>
+<rect x="48" y="198" width="280" height="148" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="188.0" y="233" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">文档来源</text>
+<text x="188.0" y="264" text-anchor="middle" font-size="17" fill="#4f6582">产品手册 / 操作规范 / 故障知识</text>
+<text x="188.0" y="290" text-anchor="middle" font-size="17" fill="#4f6582">保存源文件与元数据</text>
+<path d="M328 272H347" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="352" y="198" width="280" height="148" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="492.0" y="233" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">Parse · 解析</text>
+<text x="492.0" y="264" text-anchor="middle" font-size="17" fill="#4f6582">提取正文与资产</text>
+<text x="492.0" y="290" text-anchor="middle" font-size="17" fill="#4f6582">按文档类型选择解析器</text>
+<path d="M632 272H651" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="656" y="198" width="280" height="148" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="796.0" y="233" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">Chunk · 切分</text>
+<text x="796.0" y="264" text-anchor="middle" font-size="17" fill="#4f6582">生成文本块</text>
+<text x="796.0" y="290" text-anchor="middle" font-size="17" fill="#4f6582">保留来源与分块元数据</text>
+<path d="M936 272H955" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="960" y="198" width="280" height="148" rx="14" fill="#e9f1ff" stroke="#94b5f5" stroke-width="1.5"/>
+<text x="1100.0" y="233" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">Embed · 向量化</text>
+<text x="1100.0" y="264" text-anchor="middle" font-size="17" fill="#4f6582">调用 Embedding 模型</text>
+<text x="1100.0" y="290" text-anchor="middle" font-size="17" fill="#4f6582">构建可检索向量</text>
+<path d="M1240 272H1259" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1264" y="198" width="280" height="148" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="1404.0" y="233" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">Index · 索引</text>
+<text x="1404.0" y="264" text-anchor="middle" font-size="17" fill="#4f6582">写入知识与向量索引</text>
+<text x="1404.0" y="290" text-anchor="middle" font-size="17" fill="#4f6582">按配置维护关键词 / 图谱</text>
+<rect x="48" y="444" width="440" height="118" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="268.0" y="479" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">对象存储</text>
+<text x="268.0" y="510" text-anchor="middle" font-size="17" fill="#4f6582">S3 兼容存储 / OSS</text>
+<text x="268.0" y="536" text-anchor="middle" font-size="17" fill="#4f6582">源文件 · 图片等文档资产</text>
+<rect x="580" y="444" width="440" height="118" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="800.0" y="479" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">异步任务与状态</text>
+<text x="800.0" y="510" text-anchor="middle" font-size="17" fill="#4f6582">RocketMQ · 任务日志</text>
+<text x="800.0" y="536" text-anchor="middle" font-size="17" fill="#4f6582">入库节点状态与错误信息</text>
+<rect x="1112" y="444" width="440" height="118" rx="14" fill="#ffffff" stroke="#d4e0ef" stroke-width="1.5"/>
+<text x="1332.0" y="479" text-anchor="middle" font-size="21" font-weight="700" fill="#123b80">知识问答</text>
+<text x="1332.0" y="510" text-anchor="middle" font-size="17" fill="#4f6582">加载检索结果与来源</text>
+<text x="1332.0" y="536" text-anchor="middle" font-size="17" fill="#4f6582">为 Workflow / Agent 提供上下文</text>
+<path d="M188 346V438" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M796 346V438" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1404 346V438" fill="none" stroke="#7297c9" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="48" y="628" font-size="17" fill="#627693">关键词与图谱为可选通道；启用前需配置对应服务及入库、检索开关。</text>
+</g></svg>
