@@ -5,6 +5,7 @@ export interface UserItem {
   username: string;
   role: string;
   avatar?: string | null;
+  displayAvatar?: string;
   createTime?: string | null;
   updateTime?: string | null;
 }

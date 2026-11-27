@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar } from "@/components/common/Avatar";
+import { userAvatarUrl } from "@/lib/userAvatar";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -132,7 +133,7 @@ export function UserListPage() {
         const payload: UserUpdatePayload = {
           username: trimmedUsername,
           role: form.role || "user",
-          avatar: form.avatar?.trim() || undefined,
+          avatar: form.avatar?.trim() || "",
           password: trimmedPassword || undefined
         };
         await updateUser(dialogState.user.id, payload);
@@ -203,7 +204,7 @@ export function UserListPage() {
                         <div className="flex items-center gap-3">
                           <Avatar
                             name={user.username || "用户"}
-                            src={user.avatar?.trim() || undefined}
+                            src={userAvatarUrl(user)}
                             className="h-9 w-9 border-slate-200 bg-indigo-50 text-xs font-semibold text-indigo-600"
                           />
                           <div>

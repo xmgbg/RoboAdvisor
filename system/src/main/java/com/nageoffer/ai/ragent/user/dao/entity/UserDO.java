@@ -49,6 +49,14 @@ public class UserDO {
      */
     private String avatar;
 
+    public String displayAvatarUrl() {
+        String url = avatar == null ? "" : avatar.trim();
+        if ("admin".equals(username) && (url.isEmpty() || "https://static.deepseek.com/user-avatar/G_6cuD8GbD53VwGRwisvCsZ6".equals(url))) {
+            return "/avatars/admin.jpg";
+        }
+        return url.isEmpty() ? "/avatars/employee-default.png" : url;
+    }
+
     /**
      * 角色：admin / user
      */

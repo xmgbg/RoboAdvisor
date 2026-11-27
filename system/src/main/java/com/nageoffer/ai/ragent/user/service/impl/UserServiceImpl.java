@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (requestParam.getAvatar() != null) {
-            record.setAvatar(StrUtil.trimToNull(requestParam.getAvatar()));
+            record.setAvatar(requestParam.getAvatar().trim());
         }
 
         if (requestParam.getPassword() != null) {
@@ -254,6 +254,7 @@ public class UserServiceImpl implements UserService {
                 .username(record.getUsername())
                 .role(record.getRole())
                 .avatar(record.getAvatar())
+                .displayAvatar(record.displayAvatarUrl())
                 .createTime(record.getCreateTime())
                 .updateTime(record.getUpdateTime())
                 .build();

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { userAvatarUrl } from "@/lib/userAvatar";
 import {
   BookOpen,
   Check,
@@ -166,7 +167,7 @@ export function AgentSidebar() {
 
   const username = user?.username || user?.userId || "用户";
   const displayName = /^\d+$/.test(username) ? "用户" : username;
-  const avatarUrl = user?.avatar?.trim();
+  const avatarUrl = userAvatarUrl(user);
   const showAvatar = Boolean(avatarUrl) && !avatarFailed;
   const keyword = query.trim().toLowerCase();
   const shown = keyword

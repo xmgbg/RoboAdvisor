@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Loading } from "@/components/common/Loading";
 import { cn } from "@/lib/utils";
+import { userAvatarUrl } from "@/lib/userAvatar";
 import { useAuthStore } from "@/stores/authStore";
 import { useChatStore } from "@/stores/chatStore";
 
@@ -121,7 +122,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     setAvatarFailed(false);
   }, [user?.avatar, user?.userId]);
 
-  const avatarUrl = user?.avatar?.trim();
+  const avatarUrl = userAvatarUrl(user);
   const showAvatar = Boolean(avatarUrl) && !avatarFailed;
   const avatarFallback = (user?.username || user?.userId || "用户").slice(0, 1).toUpperCase();
   const sessionTitleFont =

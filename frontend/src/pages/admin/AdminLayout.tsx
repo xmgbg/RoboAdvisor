@@ -41,6 +41,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { useGitHubStars } from "@/hooks/useGitHubStars";
 import { cn } from "@/lib/utils";
+import { userAvatarUrl } from "@/lib/userAvatar";
 import { toast } from "sonner";
 import { changePassword } from "@/services/userService";
 import {
@@ -333,7 +334,7 @@ export function AdminLayout() {
     return items;
   }, [location.pathname, location.search]);
 
-  const avatarUrl = user?.avatar?.trim();
+  const avatarUrl = userAvatarUrl(user);
   const showAvatar = Boolean(avatarUrl);
   const roleLabel = user?.role === "admin" ? "管理员" : "成员";
   const starLabel = useMemo(() => {
@@ -457,9 +458,13 @@ export function AdminLayout() {
       <aside className={cn("admin-sidebar", collapsed && "admin-sidebar--collapsed")}>
         <div className="admin-sidebar__brand">
           <div className={cn("flex items-center gap-3", collapsed && "justify-center")}>
-            <div className="admin-sidebar__logo">
-              <Bot className="h-[22px] w-[22px]" />
-            </div>
+            <img
+              className="admin-sidebar__logo"
+              src={`${import.meta.env.BASE_URL}robo-advisor-logo.png`}
+              alt="智机顾问"
+              width={40}
+              height={40}
+            />
             {!collapsed && (
               <div className="min-w-0">
                 <h1 className="admin-sidebar__title">Ragent AI 管理后台</h1>
