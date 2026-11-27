@@ -19,7 +19,6 @@ package com.nageoffer.ai.ragent.rag.core.retrieval;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.nageoffer.ai.ragent.framework.context.UserContext;
 import com.nageoffer.ai.ragent.framework.convention.RetrievedChunk;
 import com.nageoffer.ai.ragent.framework.trace.RagTraceNode;
 import com.nageoffer.ai.ragent.rag.config.OrchestrationMode;
@@ -28,7 +27,6 @@ import com.nageoffer.ai.ragent.rag.config.SearchChannelProperties;
 import com.nageoffer.ai.ragent.rag.core.intent.IntentNode;
 import com.nageoffer.ai.ragent.rag.core.intent.NodeScore;
 import com.nageoffer.ai.ragent.rag.core.intent.NodeScoreFilters;
-import com.nageoffer.ai.ragent.rag.core.mcp.McpCallMeta;
 import com.nageoffer.ai.ragent.rag.core.mcp.McpExtractionResult;
 import com.nageoffer.ai.ragent.rag.core.mcp.McpParameterExtractor;
 import com.nageoffer.ai.ragent.rag.core.mcp.McpToolExecutor;
@@ -285,11 +283,7 @@ public class RetrievalEngine {
 
         // 按提参结局分流：仅 SUCCESS 才真正调用远端工具，缺必填参 / 提取失败均不调用、改注入提示进上下文
         return switch (extraction.status()) {
-            // 身份从 UserContext 取：mcpBatchExecutor 与 ragContextExecutor 都被 TtlExecutors 包过，
-            // UserContext 又是 TransmittableThreadLocal，这两跳异步之后仍取得到登录态
-            case SUCCESS -> executor.execute(
-                    extraction.params() != null ? extraction.params() : new HashMap<>(),
-                    McpCallMeta.ofUser(UserContext.getUserId()));
+            case SUCCESS -> executor.execute(extraction.params() != null ? extraction.params() : new HashMap<>());
             case NEED_CLARIFICATION -> clarificationResult(toolId, extraction.missingRequired());
             case FAILED -> extractionFailedResult(toolId);
         };
